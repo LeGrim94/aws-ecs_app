@@ -1,7 +1,7 @@
-variable "region"{
-    description = "aws region"
+variable "region" {
+  description = "aws region"
 }
 
-variable "environment"{
-    type = string
+variable "environment" {
+  type = string
 }
