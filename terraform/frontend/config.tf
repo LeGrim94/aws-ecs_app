@@ -1,9 +1,9 @@
 provider "aws" {
   default_tags {
     tags = {
-      Terraform   = "true"
-      Project     = "ecs_wordpress"
-      Service = "frontend"
+      Terraform = "true"
+      Project   = "ecs_wordpress"
+      Service   = "frontend"
     }
   }
 }
