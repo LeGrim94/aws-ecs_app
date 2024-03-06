@@ -16,6 +16,7 @@ The IaC has been developed with Terraform. The architecture was designed to be d
 
 Repo is organized as:
 
+```
 root
 ├── LICENSE
 ├── README.md
@@ -26,7 +27,7 @@ root
         ├── frontend - alb, route53 records, acm...
         │   
         └── network    - networking and route53 configuration
-    
+```  
 
 
 
