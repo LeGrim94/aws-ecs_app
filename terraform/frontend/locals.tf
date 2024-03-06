@@ -2,9 +2,11 @@ locals {
   record_name = "wp-record-${var.environment}"
 
   #listener/tg
-  listener_port     = 80
-  listener_protocol = "HTTP"
-  target_type       = "ip"
+  listener_port           = 80
+  listener_https_port     = 443
+  listener_https_protocol = "HTTPS"
+  listener_protocol       = "HTTP"
+  target_type             = "ip"
   tg_health_check = {
     enabled             = true
     healthy_threshold   = 3

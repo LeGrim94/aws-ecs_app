@@ -16,6 +16,13 @@ module "alb" {
       ip_protocol = "tcp"
       description = "HTTP web traffic"
       cidr_ipv4   = "0.0.0.0/0"
+    },
+    all_https = {
+      from_port   = 443
+      to_port     = 443
+      ip_protocol = "tcp"
+      description = "HTTPs web traffic"
+      cidr_ipv4   = "0.0.0.0/0"
     }
   }
   security_group_egress_rules = {
@@ -62,6 +69,24 @@ resource "aws_lb_listener" "front_end" {
   port              = local.listener_port
   protocol          = local.listener_protocol
 
+
+  default_action {
+    type = "redirect"
+    redirect {
+      port        = local.listener_https_port
+      protocol    = local.listener_https_protocol
+      status_code = "HTTP_301"
+    }
+  }
+}
+
+
+resource "aws_lb_listener" "front_end_https" {
+  load_balancer_arn = module.alb.arn
+  port              = local.listener_https_port
+  protocol          = local.listener_https_protocol
+  certificate_arn   = "arn_of_your_certificate"
+
   default_action {
     type = "fixed-response"
 
@@ -101,3 +126,23 @@ resource "aws_route53_record" "lb_wordpress_ael" {
   ttl     = "300"
   records = [module.alb.dns_name]
 }
+
+################################################################################
+# cloudfront for wordpress
+################################################################################
+
+module "cloudfront_wordpress" {
+  source               = "soroush/cloudfront_wordpress/aws"
+  version              = "2.0.1"
+  cnames               = ["www.examplewp.com"]
+  domain_name          = "examplewp.com"
+  origin_id            = "E22XRTe7wQ72"
+  origin_ssl_protocols = ["TLSv1.2"]
+  enabled              = true
+  acm_certificate_arn  = "arn of your certificate here"
+  tags = {
+    Environment = var.environment
+  }
+}
+
+#https://registry.terraform.io/modules/soroushatarod/cloudfront-wordpress/aws/latest - module preficongured for a wordpress cdn distribution 
