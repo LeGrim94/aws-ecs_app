@@ -29,7 +29,13 @@ root
         └── network    - networking and route53 configuration
 ```  
 
-
+Each module has it own order of deploy 'cause of obvious dependencies. To deploy correctly the order is:
+```
+├── network
+       ├──rds
+       ├──frontend
+             ├──ecs
+```              
 
 ## Architecture
 
