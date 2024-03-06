@@ -10,4 +10,9 @@ locals {
   username               = "root"
   db_port                = "3306"
   major_engine_version   = "8.0"
+
+  ##bastion
+  allocated_bastion_storage = 20
+  image_id                  = "ami-0fc3317b37c1269d3"
+  instance_type             = "t3.micro"
 }
