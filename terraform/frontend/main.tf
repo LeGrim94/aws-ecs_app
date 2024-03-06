@@ -121,7 +121,7 @@ resource "aws_lb_listener_rule" "static" {
 
 resource "aws_route53_record" "lb_wordpress_ael" {
   zone_id = data.terraform_remote_state.vpc.outputs.zone_id
-  name    = "lb-record-${var.environment}"
+  name    = "www.example.wp"
   type    = "CNAME"
   ttl     = "300"
   records = [module.alb.dns_name]

@@ -26,9 +26,6 @@ module "vpc" {
 
 }
 
-resource "aws_route53_zone" "private" {
-  name = "aws-app-zone-${var.environment}"
-  vpc {
-    vpc_id = module.vpc.vpc_id
-  }
+resource "aws_route53_zone" "primary" {
+  name = "examplewp.com"
 }
