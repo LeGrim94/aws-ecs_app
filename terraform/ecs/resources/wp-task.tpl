@@ -27,6 +27,12 @@
       "name": "WORDPRESS_DB_PASSWORD",
       "valueFrom": "${wordpress_db_password}"
     }],
+    "mountPoints": [
+      {
+        "containerPath": "${wp_content_path}",
+        "sourceVolume": "efs"
+      }
+    ],
     "logConfiguration": {
       "logDriver":"awslogs",
       "options": {
