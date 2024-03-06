@@ -1,20 +1,13 @@
-##route53##
-resource "aws_route53_record" "lb_wordpress_ael" {
-  zone_id = data.terraform_remote_state.vpc.outputs.zone_id
-  name    = local.record_name
-  type    = "CNAME"
-  ttl     = "300"
-  records = [module.alb.dns_name]
-}
-
-##ALB##
+################################################################################
+# alb
+################################################################################
 module "alb" {
   source                     = "terraform-aws-modules/alb/aws"
   version                    = "9.7.0"
   name                       = "wp-alb-${var.environment}"
   vpc_id                     = data.terraform_remote_state.vpc.outputs.vpc_id
   subnets                    = data.terraform_remote_state.vpc.outputs.public_subnets
-  enable_deletion_protection = var.environment == "dev" ? true : false
+  enable_deletion_protection = var.environment == "dev" ? false : true
   # Security Group
   security_group_ingress_rules = {
     all_http = {
@@ -95,4 +88,16 @@ resource "aws_lb_listener_rule" "static" {
       values = ["examplewp.com"]
     }
   }
+}
+
+################################################################################
+# alb record
+################################################################################
+
+resource "aws_route53_record" "lb_wordpress_ael" {
+  zone_id = data.terraform_remote_state.vpc.outputs.zone_id
+  name    = "lb-record-${var.environment}"
+  type    = "CNAME"
+  ttl     = "300"
+  records = [module.alb.dns_name]
 }

@@ -24,6 +24,6 @@ output "public_subnets" {
 }
 
 output "zone_id" {
-  description = "ID of the private zone created by Route53"
+  description = "private route53 zone id"
   value       = aws_route53_zone.private.id
 }

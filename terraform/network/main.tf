@@ -1,3 +1,7 @@
+################################################################################
+# VPC
+################################################################################
+
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
@@ -9,9 +13,11 @@ module "vpc" {
   public_subnets   = local.public_subnets
   database_subnets = local.database_subnets
 
-  enable_nat_gateway   = true
-  single_nat_gateway   = var.environment == "dev" ? true : false
-  enable_dns_hostnames = true
+  enable_nat_gateway      = true
+  single_nat_gateway      = var.environment == "dev" ? true : false
+  enable_dns_hostnames    = true
+  map_public_ip_on_launch = true
+  enable_dns_support      = true
 
 
   tags = {
@@ -20,9 +26,8 @@ module "vpc" {
 
 }
 
-#private hosted_zone
 resource "aws_route53_zone" "private" {
-  name = local.hosted_zone_name
+  name = "aws-app-zone-${var.environment}"
   vpc {
     vpc_id = module.vpc.vpc_id
   }
