@@ -1,6 +1,6 @@
-# Project Title
+# AWS ECS APP
 
-Description of the project
+This repo contain full Terraform code, configuration files and documentation needed to deploy and maintain a WordPress site on AWS. 
 
 ## Screenshots
 
@@ -8,15 +8,13 @@ Here's a screenshot of the project:
 
 ![Screenshot of the project](./docs/infrastructure.png)
 
-## Prerequisites
+## Guide
 
 - Description of prerequisites
 
-## Installation
+## Architecture
 
 - Instructions for installation
 
-## Usage
 
-- Instructions for usage
 
