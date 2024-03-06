@@ -47,9 +47,11 @@ During the VPC creation, public and private subnets are generated across differe
 The Frontend workspace manages the resources necessary for creating and provisioning the frontend of the infrastructure, such as the load balancer and its configuration, Route53 records, CloudFront distribution, etc. CloudFront is deployed in production to ensure shorter response times, caching, and high availability of the web app. (Production environment relies on having a valid certificate to use for the domain.)
 
 ### RDS:
-A MySQL instance in multi-AZ configuration is deployed. This module includes an autoscaling module that deploys an SSM-managed Amazon Linux EC2 instance to provide direct access to the database. SSM parameters such as the database password are generated to be used by the ECS task for WordPress configuration.
+A MySQL instance in multi-AZ configuration is deployed. This module includes an autoscaling module that deploys an SSM-managed Amazon Linux EC2 instance to provide direct access to the database. SSM parameters such as the database password are generated to be used by the ECS task for WordPress configuration. Security group is as strict as possible.
 
+### ECS:
 
+ECS Fargate tasks are deployed in a multi-AZ configuration of WordPress that also uses EFS to store content on a mountpoint defined in the task definition template. The resources folder contains the task definition template that uses dynamic variables defined in the task definition resource. Exclusive security group rules are also updated to allow access only from the load balancer to the tasks and from the task to the EFS and DB instance to be as strict and safe as possible.
 
 
 
