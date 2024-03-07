@@ -204,7 +204,7 @@ module "efs_sg" {
   version = "4.4.0"
 
   name        = "efs-container-sg"
-  description = "Security group per accesso efs dai container"
+  description = "sg for efs access from the containers"
   vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
 
 
