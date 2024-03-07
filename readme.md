@@ -1,6 +1,8 @@
 # AWS ECS APP
 
-This repo contain full Terraform code, configuration files and documentation needed to deploy and maintain a WordPress site on AWS. 
+
+This repository contains the full Terraform code, configuration files, and documentation needed to deploy and maintain a WordPress site on AWS, with the primary goal of creating a highly reliable, scalable web application capable of withstanding single points of failure. To achieve this goal, deployment paradigms involving multi-AZ architectures have been employed.
+
 
 ## Screenshots
 
